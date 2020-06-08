@@ -12,6 +12,7 @@ echo "<div class='myclass'>Anything goes here</div>"
 ?>
 <h2>Heading2 </h2>
 <?php
+
 for ($i = 0; $i < 5; $i++) {
     echo "<p>Paragraph no. $i</p>";
 }
