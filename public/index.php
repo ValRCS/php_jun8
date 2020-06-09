@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Hello</title>
-</head>
-<body>
-    <h1>Simple HTML</h1>
 <?php
-echo "<div class='myclass'>Anything goes here</div>"
-?>
-<h2>Heading2 </h2>
-<?php
+require_once "../src/templates/header.php";
+require_once "../src/utilities.php"; //remember no side effects for this file!
+echo "<h1>My PHP page</h1>";
+$arr = ["Valdis", "Pēteris", "Līga"];
+makeUnorderedList($arr);
 
-for ($i = 0; $i < 5; $i++) {
-    echo "<p>Paragraph no. $i</p>";
-}
-?>
-<footer>Not done by PHP</footer>
-</body>
-</html>
+echo "<div class='results'>" . myAdder(5, 200) . "</div>";
+echo "<div class='mycontainer'>";
+printFizzBuzz(30);
+echo "</div>";
+require_once "../src/templates/footer.html";
