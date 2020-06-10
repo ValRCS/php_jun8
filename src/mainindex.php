@@ -12,14 +12,18 @@ if (isset($_SESSION['myName'])) {
 
 echo "<div class='results'>" . myAdder(5, 200) . "</div>";
 echo "<hr>";
+include "templates/fizzForm.php";
 var_dump($_GET);
-if (isset($_GET['mymax'])) {
-    echo "<hr>My max is " . $_GET['mymax'];
-    $myMax = (int) $_GET['mymax'];
+if (isset($_GET['myMax'])) {
+    echo "<hr>My max is " . $_GET['myMax'];
+    $myMax = (int) $_GET['myMax'];
 } else {
     echo "<hr>No max set, sadface";
     $myMax = 15;
 }
+
+include "templates/fizzForm.php";
+include "templates/fizzForm.php";
 echo "<hr>will print up to $myMax elements<hr>";
 echo "<hr>";
 
