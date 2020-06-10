@@ -8,6 +8,9 @@ if (isset($_SESSION['myName'])) {
         $_SESSION['indexVisits']++;
     }
     echo $_SESSION['myName'] . " you have visited this page " . $_SESSION['indexVisits'] . " times<hr>";
+    include "templates/logout.html";
+} else {
+    include "templates/loginform.html";
 }
 
 echo "<div class='results'>" . myAdder(5, 200) . "</div>";
