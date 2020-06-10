@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['myName'])) {
         $_SESSION['myName'] = $_POST['myName'];
         echo "Session saved";
+        header("Location: login.php");
     } else {
         echo "No myName set";
     }
