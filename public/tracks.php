@@ -32,11 +32,15 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // var_dump($row);
         // echo "id: " . $row["id"] . " name - " . $row["name"] . " artist: " . $row["artist"] . " Created on:" . $row["created"]
+        $id = $row["id"];
         $html = "id: " . $row["id"]; //set $html text here
         $html .= " name - " . $row["name"]; //we add this line to previous $html
         $html .= " artist: " . $row["artist"];
         $html .= " Created on:" . $row["created"];
-        $html .= "<hr>";
+        $html .= "<form action='deleteSong.php' method='post'>";
+        $html .= "<button type='submit' name='deleteSong' value='$id'>";
+        $html .= "DELETE SONG</button>";
+        $html .= "</form>";
         echo $html;
         //   echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " . $row["lastname"]. "<br>";
     }
