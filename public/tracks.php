@@ -3,6 +3,7 @@ require_once "../config/config.php";
 echo "Reading my tracks<hr>";
 
 include "../src/templates/songFilterForm.html";
+include "../src/templates/addNewSongForm.html";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
