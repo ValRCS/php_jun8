@@ -33,10 +33,15 @@ if ($result->num_rows > 0) {
         // var_dump($row);
         // echo "id: " . $row["id"] . " name - " . $row["name"] . " artist: " . $row["artist"] . " Created on:" . $row["created"]
         $id = $row["id"];
-        $html = "id: " . $row["id"]; //set $html text here
-        $html .= " name - " . $row["name"]; //we add this line to previous $html
-        $html .= " artist: " . $row["artist"];
+        $name = $row['name'];
+        $artist = $row['artist'];
+        $html = "<form action='updateSong.php' method='post'>";
+        $html .= "id: " . $row["id"]; //set $html text here
+        $html .= "<input name='trackName' value='$name'>"; //we add this line to previous $html
+        $html .= "<input name='artistName' value='$artist'>"; //we add this line to previous $html
         $html .= " Created on:" . $row["created"];
+        $html .= "<button type='submit' name='updateSong' value='$id'>UPDATE SONG</button>";
+        $html .= "</form>";
         $html .= "<form action='deleteSong.php' method='post'>";
         $html .= "<button type='submit' name='deleteSong' value='$id'>";
         $html .= "DELETE SONG</button>";
