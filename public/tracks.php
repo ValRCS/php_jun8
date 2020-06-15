@@ -40,6 +40,7 @@ if ($result->num_rows > 0) {
         $html .= "<input name='trackName' value='$name'>"; //we add this line to previous $html
         $html .= "<input name='artistName' value='$artist'>"; //we add this line to previous $html
         $html .= " Created on:" . $row["created"];
+        $html .= " Updated on:" . $row["updated"];
         $html .= "<button type='submit' name='updateSong' value='$id'>UPDATE SONG</button>";
         $html .= "</form>";
         $html .= "<form action='deleteSong.php' method='post'>";
