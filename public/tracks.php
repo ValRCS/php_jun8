@@ -1,6 +1,11 @@
 <?php
+session_start();
 require_once "../config/config.php";
-echo "Reading my tracks<hr>";
+
+if (!isset($_SESSION['myName'])) {
+    include "../src/templates/loginForm.html";
+    exit(); //early exit
+}
 
 include "../src/templates/songFilterForm.html";
 include "../src/templates/addNewSongForm.html";
