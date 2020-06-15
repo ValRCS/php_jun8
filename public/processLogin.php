@@ -12,14 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($result->num_rows == 1) {
         //cool we found our user
         $row = $result->fetch_assoc();
-        var_dump($row);
-        die("For now");
-    }
+        // var_dump($row);
+        // die("For now");
+        //TODO verify login hash FIXME
+        $_SESSION['user'] = $row['username'];
+        $_SESSION['id'] = $row['id'];
 
-    if (isset($_POST['myName'])) {
-        $_SESSION['myName'] = $_POST['myName'];
-        //later we would password checking
-        echo "Session saved";
     }
 }
-header("Location: /"); //always go back to main page
+header("Location: /tracks.php"); //always go back to main page

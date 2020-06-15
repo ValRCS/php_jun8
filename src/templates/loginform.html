@@ -1,7 +1,13 @@
 <form action="processLogin.php" method="post">
     <label for="myName">My Name</label>
     <input type="text" name="myName" placeholder="Enter your user name" />
-    <input type="email" name="myEmail" placeholder="email@domain.ext" />
+    <input
+        type="email"
+        name="myEmail"
+        default="email@example.com"
+        placeholder="email@domain.ext"
+    />
     <input type="password" name="pw" placeholder="password" />
-    <button type="submit">Login</button>
+    <button type="submit" name="login">Login</button>
+    <button type="submit" name="register">Register</button>
 </form>
