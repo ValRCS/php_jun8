@@ -12,10 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stmt = $conn->prepare("INSERT INTO `users`
             (`username`, `email`, `hash`)
             VALUES ( (?), (?), (?) ) ");
-
         $stmt->bind_param("sss", $_POST["myName"], $_POST["myEmail"], $hash);
         $stmt->execute();
-
         //TODO check for success and login automatically
         header("Location: /tracks.php");
     }
