@@ -3,6 +3,9 @@ session_start();
 require_once "../config/config.php";
 
 if (!isset($_SESSION['user'])) {
+    if (isset($_GET['tryagain'])) {
+        include "../src/templates/tryAgain.html";
+    }
     include "../src/templates/loginForm.html";
     include "../src/templates/registerForm.html";
     exit(); //early exit
@@ -12,6 +15,11 @@ if (!isset($_SESSION['id'])) {
     include "../src/templates/loginForm.html";
     include "../src/templates/registerForm.html";
     exit(); //early exit
+}
+
+if (isset($_GET['loginSuccess'])) {
+    //could include more html in success template
+    echo "<div class='successLogin'>SuccessFul Login</div>";
 }
 
 echo "Hello " . $_SESSION['user'] . " your id is " . $_SESSION['id'] . "<hr>";
@@ -58,9 +66,15 @@ if ($result->num_rows > 0) {
         $id = $row["id"];
         $name = $row['name'];
         $artist = $row['artist'];
+        $isHeard = $row['isHeard'];
         $html = "<form action='updateSong.php' method='post'>";
         $html .= "id: " . $row["id"]; //set $html text here
-        $html .= "<input name='trackName' value='$name'>"; //we add this line to previous $html
+        if ($isHeard) {
+            $html .= "<input type='checkbox' name='isHeard' checked>";
+        } else {
+            $html .= "<input type='checkbox' name='isHeard'>";
+        }
+        $html .= "<input name='trackName' value='$name'>";
         $html .= "<input name='artistName' value='$artist'>"; //we add this line to previous $html
         $html .= " Created on:" . $row["created"];
         $html .= " Updated on:" . $row["updated"];
@@ -77,8 +91,8 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-$sql = "SELECT * FROM tracks WHERE artist LIKE 'ABBA'";
-$result = $conn->query($sql);
+// $sql = "SELECT * FROM tracks WHERE artist LIKE 'ABBA'";
+// $result = $conn->query($sql);
 
 // we can get all results at once and then loop through them
 // $allrows = $result->fetch_all(MYSQLI_BOTH);
