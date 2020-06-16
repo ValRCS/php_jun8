@@ -1,22 +1,20 @@
 <?php
 session_start();
 require_once "../config/config.php";
+require_once "../src/templates/header.php";
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user']) || !isset($_SESSION['id'])) {
     if (isset($_GET['tryagain'])) {
         include "../src/templates/tryAgain.html";
     }
     include "../src/templates/loginForm.html";
     include "../src/templates/registerForm.html";
+    include "../src/templates/footer.html";
+
     exit(); //early exit
 }
 
-if (!isset($_SESSION['id'])) {
-    include "../src/templates/loginForm.html";
-    include "../src/templates/registerForm.html";
-    exit(); //early exit
-}
-
+//this is optional to show usersupon first time login
 if (isset($_GET['loginSuccess'])) {
     //could include more html in success template
     echo "<div class='successLogin'>SuccessFul Login</div>";
@@ -63,17 +61,20 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // var_dump($row);
         // echo "id: " . $row["id"] . " name - " . $row["name"] . " artist: " . $row["artist"] . " Created on:" . $row["created"]
+        $myclasses = "single-song";
+        $checked = "";
+        if ($row['isHeard']) {
+            $myclasses .= " heard-song";
+            $checked = "checked";
+        }
         $id = $row["id"];
         $name = $row['name'];
         $artist = $row['artist'];
-        $isHeard = $row['isHeard'];
-        $html = "<form action='updateSong.php' method='post'>";
+
+        $html = "<div class='$myclasses'>";
+        $html .= "<form action='updateSong.php' method='post'>";
         $html .= "id: " . $row["id"]; //set $html text here
-        if ($isHeard) {
-            $html .= "<input type='checkbox' name='isHeard' checked>";
-        } else {
-            $html .= "<input type='checkbox' name='isHeard'>";
-        }
+        $html .= "<input type='checkbox' name='isHeard' $checked>";
         $html .= "<input name='trackName' value='$name'>";
         $html .= "<input name='artistName' value='$artist'>"; //we add this line to previous $html
         $html .= " Created on:" . $row["created"];
@@ -84,6 +85,7 @@ if ($result->num_rows > 0) {
         $html .= "<button type='submit' name='deleteSong' value='$id'>";
         $html .= "DELETE SONG</button>";
         $html .= "</form>";
+        $html .= "</div>";
         echo $html;
         //   echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " . $row["lastname"]. "<br>";
     }
@@ -91,21 +93,4 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-// $sql = "SELECT * FROM tracks WHERE artist LIKE 'ABBA'";
-// $result = $conn->query($sql);
-
-// we can get all results at once and then loop through them
-// $allrows = $result->fetch_all(MYSQLI_BOTH);
-// $allrows = $result->fetch_all(MYSQLI_ASSOC);
-// var_dump($allrows);
-// foreach ($allrows as $rowindex => $row) {
-//     echo "<div class='myrow' id='row-$rowindex'>";
-//     // var_dump($row);
-//     $html = "id: " . $row["id"]; //set $html text here
-//     $html .= " name - " . $row["name"]; //we add this line to previous $html
-//     $html .= " artist: " . $row["artist"];
-//     $html .= " Created on:" . $row["created"];
-//     // $html .= "<hr>";
-//     echo $html;
-//     echo "</div>";
-// }
+require_once "../src/templates/footer.html";

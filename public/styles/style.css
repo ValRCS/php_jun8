@@ -30,3 +30,12 @@ body {
 .number {
     background-color: dimgray;
 }
+
+.single-song {
+    background-color: goldenrod;
+    margin: 5px;
+}
+
+.heard-song {
+    background-color: chocolate;
+}
