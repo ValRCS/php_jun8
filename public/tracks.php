@@ -4,10 +4,13 @@ require_once "../config/config.php";
 
 if (!isset($_SESSION['user'])) {
     include "../src/templates/loginForm.html";
+    include "../src/templates/registerForm.html";
     exit(); //early exit
 }
+
 if (!isset($_SESSION['id'])) {
     include "../src/templates/loginForm.html";
+    include "../src/templates/registerForm.html";
     exit(); //early exit
 }
 
@@ -47,7 +50,7 @@ if (isset($_GET['artistName'])) {
 }
 
 if ($result->num_rows > 0) {
-    echo "Cool we got " . $result->num_rows . " rows of data!<hr>";
+    //echo "Cool we got " . $result->num_rows . " rows of data!<hr>";
     // output data of each row
     while ($row = $result->fetch_assoc()) {
         // var_dump($row);
@@ -79,16 +82,16 @@ $result = $conn->query($sql);
 
 // we can get all results at once and then loop through them
 // $allrows = $result->fetch_all(MYSQLI_BOTH);
-$allrows = $result->fetch_all(MYSQLI_ASSOC);
-var_dump($allrows);
-foreach ($allrows as $rowindex => $row) {
-    echo "<div class='myrow' id='row-$rowindex'>";
-    // var_dump($row);
-    $html = "id: " . $row["id"]; //set $html text here
-    $html .= " name - " . $row["name"]; //we add this line to previous $html
-    $html .= " artist: " . $row["artist"];
-    $html .= " Created on:" . $row["created"];
-    // $html .= "<hr>";
-    echo $html;
-    echo "</div>";
-}
+// $allrows = $result->fetch_all(MYSQLI_ASSOC);
+// var_dump($allrows);
+// foreach ($allrows as $rowindex => $row) {
+//     echo "<div class='myrow' id='row-$rowindex'>";
+//     // var_dump($row);
+//     $html = "id: " . $row["id"]; //set $html text here
+//     $html .= " name - " . $row["name"]; //we add this line to previous $html
+//     $html .= " artist: " . $row["artist"];
+//     $html .= " Created on:" . $row["created"];
+//     // $html .= "<hr>";
+//     echo $html;
+//     echo "</div>";
+// }
