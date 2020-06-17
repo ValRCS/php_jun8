@@ -74,12 +74,12 @@ if ($result->num_rows > 0) {
         $html = "<div class='$myclasses'>";
         $html .= "<form action='updateSong.php' method='post'>";
         $html .= "id: " . $row["id"]; //set $html text here
-        $html .= "<input type='checkbox' name='isHeard' $checked>";
-        $html .= "<input name='trackName' value='$name'>";
-        $html .= "<input name='artistName' value='$artist'>"; //we add this line to previous $html
+        $html .= "<input class='is-heard' type='checkbox' name='isHeard' $checked>";
+        $html .= "<input class='track-name' name='trackName' value='$name'>";
+        $html .= "<input class='artist-name' name='artistName' value='$artist'>"; //we add this line to previous $html
         $html .= " Created on:" . $row["created"];
         $html .= " Updated on:" . $row["updated"];
-        $html .= "<button type='submit' name='updateSong' value='$id'>UPDATE SONG</button>";
+        $html .= "<button type='submit' class='update-song' name='updateSong' value='$id'>UPDATE SONG</button>";
         $html .= "</form>";
         $html .= "<form action='deleteSong.php' method='post'>";
         $html .= "<button type='submit' name='deleteSong' value='$id'>";
