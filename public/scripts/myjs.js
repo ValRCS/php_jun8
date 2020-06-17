@@ -23,6 +23,8 @@ for (let cbox of cboxes) {
             artistName,
             id
         );
+        //TODO use fetch instead if we are not using jQuery
+        //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Supplying_request_options
         if (ev.currentTarget.checked) {
             $.post("updateSong.php", {
                 isHeard: ev.currentTarget.checked,
