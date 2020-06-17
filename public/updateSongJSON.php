@@ -7,21 +7,21 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $id = $_POST['updateSong']; //might want to check with if user has filled this form
 $trackName = $_POST['trackName'];
 $artistName = $_POST['artistName'];
-$concert = $_POST['concert'];
 if (isset($_POST['isHeard'])) {
     $isHeard = 1;
 } else {
     $isHeard = 0;
 }
-// we might need to convert concert date to mysql date format
-//https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date
+// var_dump($_POST);
+// die("now");
 $stmt = $conn->prepare("UPDATE `tracks`
-            SET isHeard = (?),
-                `name` = (?),
-                `artist` = (?),
-                updated = CURRENT_TIMESTAMP(),
-                concert = STR_TO_DATE((?), '%Y-%m-%d')
+            SET isHeard = (?), `name` = (?), `artist` = (?), updated = CURRENT_TIMESTAMP()
             WHERE `tracks`.`id` = (?)");
-$stmt->bind_param("dsssd", $isHeard, $trackName, $artistName, $concert, $id); //s means string, d means integer here
+$stmt->bind_param("dssd", $isHeard, $trackName, $artistName, $id); //s means string, d means integer here
 $stmt->execute();
-header("Location: /tracks.php");
+$data = [
+    "isHeard" => $isHeard,
+    "artistName" => $artistName,
+];
+header('Content-type: application/json');
+echo json_encode($data);

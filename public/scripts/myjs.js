@@ -26,22 +26,20 @@ for (let cbox of cboxes) {
         //TODO use fetch instead if we are not using jQuery
         //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Supplying_request_options
         if (ev.currentTarget.checked) {
-            $.post("updateSong.php", {
+            $.post("updateSongJSON.php", {
                 isHeard: ev.currentTarget.checked,
                 trackName: trackName,
                 artistName: artistName,
                 updateSong: id,
             });
         } else {
-            $.post("updateSong.php", {
+            $.post("updateSongJSON.php", {
                 trackName: trackName,
                 artistName: artistName,
                 updateSong: id,
+            }).done(function (data) {
+                console.log(JSON.stringify(data));
             });
         }
-
-        // .done(function( data ) {
-        //     alert( "Data Loaded: " + data );
-        // });
     };
 }

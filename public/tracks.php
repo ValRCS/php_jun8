@@ -70,6 +70,11 @@ if ($result->num_rows > 0) {
         $id = $row["id"];
         $name = $row['name'];
         $artist = $row['artist'];
+        if (isset($row['concert'])) {
+            $concert = $row['concert'];
+        } else {
+            $concert = "2025-06-17"; //TODO check more sane value
+        }
 
         $html = "<div class='$myclasses'>";
         $html .= "<form action='updateSong.php' method='post'>";
@@ -77,6 +82,7 @@ if ($result->num_rows > 0) {
         $html .= "<input class='is-heard' type='checkbox' name='isHeard' $checked>";
         $html .= "<input class='track-name' name='trackName' value='$name'>";
         $html .= "<input class='artist-name' name='artistName' value='$artist'>"; //we add this line to previous $html
+        $html .= "<input type='date' class='next-concert' name='concert' value='$concert'>";
         $html .= " Created on:" . $row["created"];
         $html .= " Updated on:" . $row["updated"];
         $html .= "<button type='submit' class='update-song' name='updateSong' value='$id'>UPDATE SONG</button>";
