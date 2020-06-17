@@ -75,6 +75,10 @@ if ($result->num_rows > 0) {
         } else {
             $concert = "2025-06-17"; //TODO check more sane value
         }
+        $datetime1 = date_create($concert);
+        $today = date_create(date("Y-m-d"));
+        //https://www.php.net/manual/en/dateinterval.format.php
+        $days = date_diff($today, $datetime1)->format('%r%a');
 
         $html = "<div class='$myclasses'>";
         $html .= "<form action='updateSong.php' method='post'>";
@@ -83,6 +87,7 @@ if ($result->num_rows > 0) {
         $html .= "<input class='track-name' name='trackName' value='$name'>";
         $html .= "<input class='artist-name' name='artistName' value='$artist'>"; //we add this line to previous $html
         $html .= "<input type='date' class='next-concert' name='concert' value='$concert'>";
+        $html .= "<span class='until-concert'>$days days until concert</span>";
         $html .= " Created on:" . $row["created"];
         $html .= " Updated on:" . $row["updated"];
         $html .= "<button type='submit' class='update-song' name='updateSong' value='$id'>UPDATE SONG</button>";
