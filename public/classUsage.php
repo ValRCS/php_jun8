@@ -1,7 +1,7 @@
 <?php
 require_once "classExamples.php";
 
-//static methods can be used before any object are made
+//static methods and variables can be used before any object are made
 echo "My roof size is " . House::mult(10, 15) . " not bad<hr>";
 echo "My foundation for all houses is " . House::$foundation . "<hr>";
 //we create new objects which are class instances
