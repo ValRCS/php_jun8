@@ -1,4 +1,6 @@
 <?php
+require "../src/checkSession.php";
+
 if (!isset($_POST['updateSong'])) {
     header("Location: /tracks.php"); // we could redirect to error page as well
 }
@@ -21,7 +23,8 @@ $stmt = $conn->prepare("UPDATE `tracks`
                 `artist` = (?),
                 updated = CURRENT_TIMESTAMP(),
                 concert = STR_TO_DATE((?), '%Y-%m-%d')
-            WHERE `tracks`.`id` = (?)");
-$stmt->bind_param("dsssd", $isHeard, $trackName, $artistName, $concert, $id); //s means string, d means integer here
+            WHERE `tracks`.`id` = (?)
+            AND tracks.userid = (?)");
+$stmt->bind_param("dsssdd", $isHeard, $trackName, $artistName, $concert, $id, $_SESSION['id']); //s means string, d means integer here
 $stmt->execute();
 header("Location: /tracks.php");
