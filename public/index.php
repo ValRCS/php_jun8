@@ -1,7 +1,10 @@
 <?php
 session_start();
+require_once "../src/classes/View.php";
+require_once "../src/classes/Model.php";
+require_once "../src/classes/Controller.php";
 
-require_once "../src/templates/header.php";
-require_once "../src/utilities.php"; //remember no side effects for this file!
-require_once "../src/mainindex.php";
-require_once "../src/templates/footer.html";
+$view = new View();
+$model = new Model($view);
+$controller = new Controller($model);
+$controller->route();
